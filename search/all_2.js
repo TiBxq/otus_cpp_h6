@@ -7,6 +7,5 @@ var searchData=
   ['matrix',['Matrix',['../class_matrix.html',1,'Matrix&lt; T, defaultValue &gt;'],['../class_matrix.html#aa2e613a7c072a027bb66da970e8842f5',1,'Matrix::Matrix()']]],
   ['matrix_2ecpp',['matrix.cpp',['../matrix_8cpp.html',1,'']]],
   ['matrix_5ftest_2ecpp',['matrix_test.cpp',['../matrix__test_8cpp.html',1,'']]],
-  ['matrixelement',['MatrixElement',['../class_matrix_element.html',1,'MatrixElement&lt; T, defaultValue &gt;'],['../class_matrix_element.html#ae3a176f1793b8b6754d1a9048fe8bea4',1,'MatrixElement::MatrixElement()'],['../class_matrix_element.html#a7be2575d3d60d75661ec98f778742563',1,'MatrixElement::MatrixElement(int index, Matrix&lt; T, defaultValue &gt; *matrix)']]],
-  ['matrixelementproxy',['MatrixElementProxy',['../class_matrix_element_proxy.html',1,'']]]
+  ['matrixelement',['MatrixElement',['../class_matrix_element.html',1,'MatrixElement&lt; T, defaultValue &gt;'],['../class_matrix_element.html#ae3a176f1793b8b6754d1a9048fe8bea4',1,'MatrixElement::MatrixElement()'],['../class_matrix_element.html#a7be2575d3d60d75661ec98f778742563',1,'MatrixElement::MatrixElement(int index, Matrix&lt; T, defaultValue &gt; *matrix)']]]
 ];
