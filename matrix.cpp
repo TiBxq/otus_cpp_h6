@@ -13,7 +13,7 @@ template<typename T>
 class MatrixElement
 {
 public:
-    MatrixElement() : m_matrix(nullptr), m_index(-1) {}
+    MatrixElement() : m_index(-1), m_matrix(nullptr) {}
     MatrixElement(T value, int index, Matrix<T>* matrix) : m_value(value), m_index(index), m_matrix(matrix) {}
     T get() { return m_value; }
     T& operator=(const T& value)
