@@ -6,15 +6,15 @@
 #include <map>
 #include <algorithm>
 
-template<typename T>
+template<typename T, T defaultValue>
 class Matrix;
 
-template<typename T>
+template<typename T, T defaultValue>
 class MatrixElement
 {
 public:
     MatrixElement() : m_index(-1), m_matrix(nullptr) {}
-    MatrixElement(T value, int index, Matrix<T>* matrix) : m_value(value), m_index(index), m_matrix(matrix) {}
+    MatrixElement(int index, Matrix<T, defaultValue>* matrix) : m_value(defaultValue), m_index(index), m_matrix(matrix) {}
     T get() { return m_value; }
     T& operator=(const T& value)
     {
@@ -25,7 +25,7 @@ public:
 //private:
     T m_value;
     int m_index;
-    Matrix<T>* m_matrix;
+    Matrix<T, defaultValue>* m_matrix;
 };
 
 template<typename T>
@@ -35,31 +35,31 @@ public:
     
 };
 
-template<typename T>
+template<typename T, T defaultValue>
 class Matrix
 {
 public:
     Matrix() : m_size( 0 ) {}
 
-    MatrixElement<T> operator[](std::size_t index)
+    MatrixElement<T, defaultValue> operator[](std::size_t index)
     {
         auto it = m_values.find(index);
         if (it == m_values.end())
         {
-          return MatrixElement<T>(-1, index, this);
+          return MatrixElement<T, defaultValue>(index, this);
         }
 
         //if (index > m_size) m_size = index;
         return m_values[index];
     }
 
-    void Add(const MatrixElement<T>& value)
+    void Add(const MatrixElement<T, defaultValue>& value)
     {
       m_values.emplace(value.m_index, value);
     }
 
 private:
-    std::map<std::size_t, MatrixElement<T>> m_values;
+    std::map<std::size_t, MatrixElement<T, defaultValue>> m_values;
     std::size_t m_size;
     //T m_default = value;
 };
@@ -68,7 +68,7 @@ int main(/*int argc, char const *argv[]*/)
 {
     
 
-    Matrix<int> m;
+    Matrix<int, -1> m;
     //MatrixElement<int> a( -1, &m );
     //a.
     m[0] = 10;
