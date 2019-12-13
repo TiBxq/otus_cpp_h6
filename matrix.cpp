@@ -28,18 +28,11 @@ public:
     Matrix<T, defaultValue>* m_matrix;
 };
 
-template<typename T>
-class MatrixElementProxy
-{
-public:
-    
-};
-
 template<typename T, T defaultValue>
 class Matrix
 {
 public:
-    Matrix() : m_size( 0 ) {}
+    Matrix() {}
 
     MatrixElement<T, defaultValue> operator[](std::size_t index)
     {
@@ -49,19 +42,18 @@ public:
           return MatrixElement<T, defaultValue>(index, this);
         }
 
-        //if (index > m_size) m_size = index;
         return m_values[index];
     }
 
     void Add(const MatrixElement<T, defaultValue>& value)
     {
-      m_values.emplace(value.m_index, value);
+        m_values.emplace(value.m_index, value);
     }
+
+    std::size_t size() { return m_values.size(); }
 
 private:
     std::map<std::size_t, MatrixElement<T, defaultValue>> m_values;
-    std::size_t m_size;
-    //T m_default = value;
 };
 
 int main(/*int argc, char const *argv[]*/)
@@ -69,9 +61,9 @@ int main(/*int argc, char const *argv[]*/)
     
 
     Matrix<int, -1> m;
-    //MatrixElement<int> a( -1, &m );
-    //a.
+    std::cout << m.size() << std::endl;
     m[0] = 10;
+    std::cout << m.size() << std::endl;
     std::cout << m[0].get() << "\t" << m[1].get() << std::endl;
 
     return 0;
