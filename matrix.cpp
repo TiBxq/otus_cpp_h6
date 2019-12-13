@@ -46,7 +46,7 @@ public:
         auto it = m_values.find(index);
         if (it == m_values.end())
         {
-          return MatrixElement<T>(-1, -1, this);
+          return MatrixElement<T>(-1, index, this);
         }
 
         //if (index > m_size) m_size = index;
