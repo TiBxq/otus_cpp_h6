@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_5b_5d',['operator[]',['../class_matrix.html#a07689bbd5459f62c65313a545f30d70c',1,'Matrix']]]
+  ['get',['get',['../class_matrix_element.html#aa543cb0675bcb9f90eaec83df8b63f76',1,'MatrixElement']]]
 ];

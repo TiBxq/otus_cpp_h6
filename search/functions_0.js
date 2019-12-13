@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main',['main',['../matrix_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;matrix.cpp'],['../matrix__test_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;matrix_test.cpp']]]
+  ['add',['Add',['../class_matrix.html#ad84826ad72d75b018841eb1fa983d15f',1,'Matrix']]]
 ];
