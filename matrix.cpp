@@ -13,8 +13,8 @@ template<typename T, T defaultValue>
 class MatrixElement
 {
 public:
-    MatrixElement() : m_index(-1), m_matrix(nullptr) {}
-    MatrixElement(int index, Matrix<T, defaultValue>* matrix) : m_value(defaultValue), m_index(index), m_matrix(matrix) {}
+    MatrixElement() : m_matrix(nullptr) {}
+    MatrixElement(std::pair<std::size_t, std::size_t> index, Matrix<T, defaultValue>* matrix) : m_value(defaultValue), m_index(index), m_matrix(matrix) {}
     T get() { return m_value; }
     T& operator=(const T& value)
     {
@@ -24,7 +24,7 @@ public:
     }
 //private:
     T m_value;
-    int m_index;
+    std::pair<std::size_t, std::size_t> m_index;
     Matrix<T, defaultValue>* m_matrix;
 };
 
@@ -34,6 +34,8 @@ class Matrix
 public:
     Matrix() {}
 
+    using ValuesContainer = std::map<std::pair<std::size_t, std::size_t>, MatrixElement<T, defaultValue>>;
+
     void Add(const MatrixElement<T, defaultValue>& value)
     {
         m_values.emplace(value.m_index, value);
@@ -41,35 +43,35 @@ public:
 
     std::size_t size() { return m_values.size(); }
 
-    typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator begin() { return m_values.begin(); }
-    typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator end() { return m_values.end(); }
+    typename ValuesContainer::iterator begin() { return m_values.begin(); }
+    typename ValuesContainer::iterator end() { return m_values.end(); }
 
-    //template<typename T, T defaultValue>
     struct MatrixHelper
     {
-        MatrixHelper(Matrix<T, defaultValue>* a_values) : m_matrix(a_values) {}
+        MatrixHelper(Matrix<T, defaultValue>* values, std::size_t x) : m_matrix(values), m_x(x) {}
 
-        MatrixElement<T, defaultValue> operator[](std::size_t index)
+        MatrixElement<T, defaultValue> operator[](std::size_t y)
         {
-            auto it = m_matrix->m_values.find(index);
+            auto it = m_matrix->m_values.find(std::make_pair(m_x, y));
             if (it == m_matrix->m_values.end())
             {
-                return MatrixElement<T, defaultValue>(index, m_matrix);
+                return MatrixElement<T, defaultValue>(std::make_pair(m_x, y), m_matrix);
             }
 
-            return m_matrix->m_values[index];
+            return m_matrix->m_values[std::make_pair(m_x, y)];
         }
 
+        std::size_t m_x;
         Matrix<T, defaultValue>* m_matrix;
     };
 
-    MatrixHelper/*<T, defaultValue>*/ operator[](std::size_t)
+    MatrixHelper operator[](std::size_t x)
     {
-        return MatrixHelper/*<T, defaultValue>*/(this);
+        return MatrixHelper(this, x);
     }
 
 private:
-    std::map<std::size_t, MatrixElement<T, defaultValue>> m_values;
+    ValuesContainer m_values;
 };
 
 int main(/*int argc, char const *argv[]*/)
@@ -78,16 +80,16 @@ int main(/*int argc, char const *argv[]*/)
 
     Matrix<int, -1> m;
     std::cout << m.size() << std::endl;
-    m[0][0] = 10;
+    m[3][4] = 10;
     std::cout << m.size() << std::endl;
-    std::cout << m[0][0].get() << "\t" << m[1][1].get() << std::endl;
+    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
 
     for (auto a : m)
     {
-        int index;
+        std::pair<std::size_t, std::size_t> index;
         MatrixElement<int, -1> value;
         std::tie(index, value) = a;
-        std::cout << "index: " << index << " value: " << value.get() << std::endl;
+        std::cout << "index: " << index.first << "," << index.second << " value: " << value.get() << std::endl;
     }
 
     return 0;
