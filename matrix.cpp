@@ -52,6 +52,9 @@ public:
 
     std::size_t size() { return m_values.size(); }
 
+    typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator begin() { return m_values.begin(); }
+    typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator end() { return m_values.end(); }
+
 private:
     std::map<std::size_t, MatrixElement<T, defaultValue>> m_values;
 };
@@ -65,6 +68,14 @@ int main(/*int argc, char const *argv[]*/)
     m[0] = 10;
     std::cout << m.size() << std::endl;
     std::cout << m[0].get() << "\t" << m[1].get() << std::endl;
+
+    for (auto a : m)
+    {
+        int index;
+        MatrixElement<int, -1> value;
+        std::tie(index, value) = a;
+        std::cout << "index: " << index << " value: " << value.get() << std::endl;
+    }
 
     return 0;
 }
