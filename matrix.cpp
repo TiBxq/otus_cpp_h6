@@ -34,17 +34,6 @@ class Matrix
 public:
     Matrix() {}
 
-    MatrixElement<T, defaultValue> operator[](std::size_t index)
-    {
-        auto it = m_values.find(index);
-        if (it == m_values.end())
-        {
-          return MatrixElement<T, defaultValue>(index, this);
-        }
-
-        return m_values[index];
-    }
-
     void Add(const MatrixElement<T, defaultValue>& value)
     {
         m_values.emplace(value.m_index, value);
@@ -54,6 +43,30 @@ public:
 
     typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator begin() { return m_values.begin(); }
     typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator end() { return m_values.end(); }
+
+    template<typename T, T defaultValue>
+    struct MatrixHelper
+    {
+        MatrixHelper(Matrix<T, defaultValue>* a_values) : m_matrix(a_values) {}
+
+        MatrixElement<T, defaultValue> operator[](std::size_t index)
+        {
+            auto it = m_matrix->m_values.find(index);
+            if (it == m_matrix->m_values.end())
+            {
+                return MatrixElement<T, defaultValue>(index, m_matrix);
+            }
+
+            return m_matrix->m_values[index];
+        }
+
+        Matrix<T, defaultValue>* m_matrix;
+    };
+
+    MatrixHelper<T, defaultValue> operator[](std::size_t index)
+    {
+        return MatrixHelper<T, defaultValue>(this);
+    }
 
 private:
     std::map<std::size_t, MatrixElement<T, defaultValue>> m_values;
@@ -65,9 +78,9 @@ int main(/*int argc, char const *argv[]*/)
 
     Matrix<int, -1> m;
     std::cout << m.size() << std::endl;
-    m[0] = 10;
+    m[0][0] = 10;
     std::cout << m.size() << std::endl;
-    std::cout << m[0].get() << "\t" << m[1].get() << std::endl;
+    std::cout << m[0][0].get() << "\t" << m[1][1].get() << std::endl;
 
     for (auto a : m)
     {
