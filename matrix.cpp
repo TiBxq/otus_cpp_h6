@@ -44,7 +44,7 @@ public:
     typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator begin() { return m_values.begin(); }
     typename std::map<std::size_t, MatrixElement<T, defaultValue>>::iterator end() { return m_values.end(); }
 
-    template<typename T, T defaultValue>
+    //template<typename T, T defaultValue>
     struct MatrixHelper
     {
         MatrixHelper(Matrix<T, defaultValue>* a_values) : m_matrix(a_values) {}
@@ -63,9 +63,9 @@ public:
         Matrix<T, defaultValue>* m_matrix;
     };
 
-    MatrixHelper<T, defaultValue> operator[](std::size_t index)
+    MatrixHelper/*<T, defaultValue>*/ operator[](std::size_t)
     {
-        return MatrixHelper<T, defaultValue>(this);
+        return MatrixHelper/*<T, defaultValue>*/(this);
     }
 
 private:
