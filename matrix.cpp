@@ -48,7 +48,7 @@ public:
 
     struct MatrixHelper
     {
-        MatrixHelper(Matrix<T, defaultValue>* values, std::size_t x) : m_matrix(values), m_x(x) {}
+        MatrixHelper(Matrix<T, defaultValue>* values, std::size_t x) : m_x(x), m_matrix(values) {}
 
         MatrixElement<T, defaultValue> operator[](std::size_t y)
         {
