@@ -6,7 +6,7 @@ project(matrix VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
-add_executable(matrix matrix.cpp)
+add_executable(matrix matrix.h matrix.cpp)
 add_executable(matrix_test matrix_test.cpp)
 
 set_target_properties(matrix_test PROPERTIES
