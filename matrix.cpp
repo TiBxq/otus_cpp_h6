@@ -4,27 +4,30 @@
 
 int main(/*int argc, char const *argv[]*/)
 {
-    Matrix<int, -1> m;
-    std::cout << m.size() << std::endl;
-    m[3][4] = 10;
-    std::cout << m.size() << std::endl;
-    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
-    m[3][4] = 5;
-    std::cout << m.size() << std::endl;
-    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
-    m[3][4] = -1;
-    std::cout << m.size() << std::endl;
-    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
-    m[3][4] = 8;
-    std::cout << m.size() << std::endl;
-    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
+    Matrix<int, 0> matrix;
+    for (std::size_t i = 0; i < 10; ++i)
+    {
+        matrix[i][i] = i;
+        matrix[i][9 - i] = 9 - i;
+    }
 
-    for (auto a : m)
+    for (std::size_t i = 1; i < 9; ++i)
+    {
+        for (std::size_t j = 0; j < 10; ++j)
+        {
+            std::cout << matrix[i][j].get() << " ";
+        }
+        std::cout << std::endl;
+    }
+       
+    std::cout << matrix.size() << std::endl;
+
+    for (auto a : matrix)
     {
         std::pair<std::size_t, std::size_t> index;
-        MatrixElement<int, -1> value;
+        MatrixElement<int, 0> value;
         std::tie(index, value) = a;
-        std::cout << "index: " << index.first << "," << index.second << " value: " << value.get() << std::endl;
+        std::cout << index.first << " " << index.second << " " << value.get() << std::endl;
     }
 
     return 0;
