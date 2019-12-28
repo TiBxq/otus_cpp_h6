@@ -15,7 +15,14 @@ public:
     T& operator=(const T& value)
     {
         m_value = value;
-        m_matrix->Add(*this);
+        if (value != defaultValue)
+        {
+            m_matrix->Add(*this);
+        }
+        else
+        {
+            m_matrix->Remove(*this);
+        }
         return m_value;
     }
     //private:
@@ -34,23 +41,16 @@ public:
 
     void Add(const MatrixElement<T, defaultValue>& value)
     {
-        m_values.emplace(value.m_index, value);
+        m_values[value.m_index] = value;
     }
 
     void Remove(const MatrixElement<T, defaultValue>& value)
     {
-        /*if (value.m_value == defaultValue)
+        auto it = m_values.find(value.m_index);
+        if (it != m_values.end())
         {
-            auto it = m_values.find(value.m_value);
-            if (it != m_values.end())
-            {
-                m_values.erase();
-            }
+            m_values.erase(it);
         }
-        else
-        {
-            m_values.emplace(value.m_index, value);
-        }*/
     }
 
 

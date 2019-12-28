@@ -4,11 +4,18 @@
 
 int main(/*int argc, char const *argv[]*/)
 {
-    
-
     Matrix<int, -1> m;
     std::cout << m.size() << std::endl;
     m[3][4] = 10;
+    std::cout << m.size() << std::endl;
+    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
+    m[3][4] = 5;
+    std::cout << m.size() << std::endl;
+    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
+    m[3][4] = -1;
+    std::cout << m.size() << std::endl;
+    std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
+    m[3][4] = 8;
     std::cout << m.size() << std::endl;
     std::cout << m[3][4].get() << "\t" << m[1][1].get() << std::endl;
 
