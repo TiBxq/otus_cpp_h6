@@ -36,8 +36,6 @@ template<typename T, T defaultValue>
 class Matrix
 {
 public:
-    Matrix() {}
-
     using ValuesContainer = std::map<std::pair<std::size_t, std::size_t>, MatrixElement<T, defaultValue>>;
 
     void Add(const MatrixElement<T, defaultValue>& value)
