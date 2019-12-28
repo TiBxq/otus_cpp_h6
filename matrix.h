@@ -11,7 +11,8 @@ class MatrixElement
 public:
     MatrixElement() : m_matrix(nullptr) {}
     MatrixElement(std::pair<std::size_t, std::size_t> index, Matrix<T, defaultValue>* matrix) : m_value(defaultValue), m_index(index), m_matrix(matrix) {}
-    T get() { return m_value; }
+    T get() const { return m_value; }
+    std::pair<std::size_t, std::size_t> getIndex() const { return m_index; }
     T& operator=(const T& value)
     {
         m_value = value;
@@ -25,7 +26,7 @@ public:
         }
         return m_value;
     }
-    //private:
+private:
     T m_value;
     std::pair<std::size_t, std::size_t> m_index;
     Matrix<T, defaultValue>* m_matrix;
@@ -41,18 +42,17 @@ public:
 
     void Add(const MatrixElement<T, defaultValue>& value)
     {
-        m_values[value.m_index] = value;
+        m_values[value.getIndex()] = value;
     }
 
     void Remove(const MatrixElement<T, defaultValue>& value)
     {
-        auto it = m_values.find(value.m_index);
+        auto it = m_values.find(value.getIndex());
         if (it != m_values.end())
         {
             m_values.erase(it);
         }
     }
-
 
     std::size_t size() { return m_values.size(); }
 
