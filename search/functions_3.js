@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['get',['get',['../class_matrix_element.html#a3c9cf8b801be448f6860c24ecc019446',1,'MatrixElement']]]
+  ['get',['get',['../class_matrix_element.html#ae64a49f1036bc81401efb51618ad3a7c',1,'MatrixElement']]],
+  ['getindex',['getIndex',['../class_matrix_element.html#a4ff58e30a37949c49654667e4aa86d03',1,'MatrixElement']]]
 ];
